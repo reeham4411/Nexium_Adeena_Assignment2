@@ -3,6 +3,7 @@ import { connectToMongo } from '@/lib/mongo';
 import Blog from '@/lib/models/Blogs';
 import { supabase } from '@/lib/supabase';
 import { translateToUrdu } from '@/lib/translate';
+import { generateSummary } from '@/lib/summary';
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing blogId' }, { status: 400 });
     }
 
-    //  fetch blog text from MongoDB
+    // Connect to MongoDB and fetch blog
     await connectToMongo();
     const blog = await Blog.findById(blogId);
 
@@ -22,13 +23,13 @@ export async function POST(req: NextRequest) {
 
     const fullText = blog.fullText;
 
-    // summary logic
-    const summary = fullText.split('. ').slice(0, 3).join('. ') + '.';
+    // Generate summary using upgraded logic
+    const summary = generateSummary(fullText);
 
     // Translate summary to Urdu
     const urduSummary = await translateToUrdu(summary);
 
-    // Save to Supabase
+    // Save summaries to Supabase
     const { error } = await supabase.from('summaries').insert([
       {
         blog_url: blog.url,
