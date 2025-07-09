@@ -5,15 +5,21 @@ import { supabase } from '@/lib/supabase';
 import { translateToUrdu } from '@/lib/translate';
 import { generateSummary } from '@/lib/summary';
 
+export async function GET() {
+  console.log('GET /api/summary hit');
+  return NextResponse.json({ msg: 'GET is working' });
+}
+
 export async function POST(req: NextRequest) {
+  console.log('POST /api/summary hit');
   try {
     const { blogId } = await req.json();
+    console.log('Received blogId:', blogId);
 
     if (!blogId) {
       return NextResponse.json({ error: 'Missing blogId' }, { status: 400 });
     }
 
-    // Connect to MongoDB and fetch blog
     await connectToMongo();
     const blog = await Blog.findById(blogId);
 
@@ -22,21 +28,20 @@ export async function POST(req: NextRequest) {
     }
 
     const fullText = blog.fullText;
-
-    // Generate summary using upgraded logic
     const summary = generateSummary(fullText);
-
-    // Translate summary to Urdu
     const urduSummary = await translateToUrdu(summary);
+console.log('Urdu summary result:', urduSummary);
+if (!urduSummary || typeof urduSummary !== 'string') {
+  return NextResponse.json({ error: 'Translation failed' }, { status: 500 });
+}
 
-    // Save summaries to Supabase
     const { error } = await supabase.from('summaries').insert([
       {
-        blog_url: blog.url,
-        summary_en: summary,
-        summary_ur: urduSummary,
+        url: blog.url,
+        summary: summary,
+        translation: urduSummary,
         created_at: new Date().toISOString(),
-      },
+      }
     ]);
 
     if (error) {
@@ -46,8 +51,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       message: 'Summary and translation saved successfully.',
-      summary_en: summary,
-      summary_ur: urduSummary,
+      summary: summary,
+      translation: urduSummary,
     });
 
   } catch (err: any) {
