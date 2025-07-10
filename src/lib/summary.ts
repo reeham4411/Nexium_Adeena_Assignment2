@@ -1,19 +1,16 @@
-export function generateSummary(text: string): string {
-  if (!text) return '';
+export async function generateAISummary(text: string): Promise<string> {
+  const response = await fetch("http://localhost:8000/summarize", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ text }),
+  });
 
-  const keywords = ['important', 'note', 'key', 'main', 'highlight'];
-  const sentences = text.split('.').map(s => s.trim()).filter(Boolean);
+  if (!response.ok) {
+    throw new Error(`Summarization failed: ${response.statusText}`);
+  }
 
-  // Collect sentences with keywords first
-  const keywordSentences = sentences.filter(sentence =>
-    keywords.some(keyword => sentence.toLowerCase().includes(keyword))
-  );
-
-  // If not enough keyword sentences, fill in with leading sentences
-  const summarySentences = [
-    ...keywordSentences.slice(0, 2),
-    ...sentences.slice(0, 3),
-  ].slice(0, 3); 
-
-  return summarySentences.join('. ') + '.';
+  const data = await response.json();
+  return data.summary;
 }

@@ -3,7 +3,7 @@ import { connectToMongo } from '@/lib/mongo';
 import Blog from '@/lib/models/Blogs';
 import { supabase } from '@/lib/supabase';
 import { translateToUrdu } from '@/lib/translate';
-import { generateSummary } from '@/lib/summary';
+import { generateAISummary } from '@/lib/summary';
 
 export async function GET() {
   console.log('GET /api/summary hit');
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     }
 
     const fullText = blog.fullText;
-    const summary = generateSummary(fullText);
+    const summary = await generateAISummary(fullText);
     const urduSummary = await translateToUrdu(summary);
 console.log('Urdu summary result:', urduSummary);
 if (!urduSummary || typeof urduSummary !== 'string') {
