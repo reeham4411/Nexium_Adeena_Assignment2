@@ -41,7 +41,9 @@ async def summarize(request: Request):
         # Summarize each chunk
         summary_parts = []
         for chunk in chunks:
-            result = summarizer(chunk, max_length=150, min_length=40, do_sample=False)
+            result = summarizer(chunk, max_length=150, min_length=40, do_sample=True, temperature=0.8,
+        top_k=50,
+        top_p=0.95)
             summary_parts.append(result[0]['summary_text'])
 
         full_summary = " ".join(summary_parts)
