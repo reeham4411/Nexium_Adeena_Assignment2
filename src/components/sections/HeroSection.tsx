@@ -77,14 +77,14 @@ export default function HeroSection() {
                 Start Summarizing
               </Button>
 
-              <Button
+              {/* <Button
                 variant="outline"
                 size="lg"
                 onClick={() => window.open("#features", "_self")}
                 className="hover:scale-105 transition-transform"
               >
                 Learn More
-              </Button>
+              </Button> */}
             </div>
 
             {/* Stats */}
