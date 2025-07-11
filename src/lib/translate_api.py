@@ -10,7 +10,7 @@ summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 # Enable CORS for frontend calls
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Update with your frontend URL in production
+    allow_origins=["http://localhost:3000"],  
     allow_methods=["*"],
     allow_headers=["*"],
 )

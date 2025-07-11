@@ -6,13 +6,11 @@ import {
   Globe,
   Copy,
   Download,
-  Share2,
   ExternalLink,
   CheckCircle,
   Languages,
   Calendar,
   Clock,
-  Bookmark,
 } from "lucide-react";
 import Button from "../shared/Button";
 
@@ -30,15 +28,11 @@ interface SummaryData {
 
 interface SummaryCardProps {
   data: SummaryData;
-  onSave?: (id: string) => void;
-  onShare?: (id: string) => void;
   className?: string;
 }
 
 export default function SummaryCard({
   data,
-  onSave,
-  onShare,
   className = "",
 }: SummaryCardProps) {
   const [copiedField, setCopiedField] = useState<string | null>(null);
@@ -121,26 +115,6 @@ ${data.urduTranslation}
                 <span className="text-sm truncate max-w-xs">{data.url}</span>
               </a>
             </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onSave?.(data.id)}
-              className="text-white hover:bg-white/20"
-              leftIcon={<Bookmark className="w-4 h-4" />}
-            >
-              Save
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onShare?.(data.id)}
-              className="text-white hover:bg-white/20"
-              leftIcon={<Share2 className="w-4 h-4" />}
-            >
-              Share
-            </Button>
           </div>
         </div>
       </div>
@@ -227,11 +201,9 @@ ${data.urduTranslation}
                 {copiedField === "summary" ? "Copied!" : "Copy"}
               </Button>
             </div>
-            <div className="prose prose-gray max-w-none">
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {data.summary}
-              </p>
-            </div>
+            <p className="text-gray-700 leading-relaxed text-lg">
+              {data.summary}
+            </p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -257,14 +229,12 @@ ${data.urduTranslation}
                 {copiedField === "translation" ? "Copied!" : "Copy"}
               </Button>
             </div>
-            <div className="prose prose-gray max-w-none">
-              <p
-                className="text-gray-700 leading-relaxed text-lg text-right"
-                dir="rtl"
-              >
-                {data.urduTranslation}
-              </p>
-            </div>
+            <p
+              className="text-gray-700 leading-relaxed text-lg text-right"
+              dir="rtl"
+            >
+              {data.urduTranslation}
+            </p>
           </div>
         )}
       </div>
@@ -299,24 +269,6 @@ ${data.urduTranslation}
               }
             >
               {copiedField === "both" ? "Copied Both!" : "Copy Both"}
-            </Button>
-          </div>
-          <div className="flex gap-3">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onSave?.(data.id)}
-              leftIcon={<Bookmark className="w-4 h-4" />}
-            >
-              Save for Later
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => onShare?.(data.id)}
-              leftIcon={<Share2 className="w-4 h-4" />}
-            >
-              Share Summary
             </Button>
           </div>
         </div>

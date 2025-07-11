@@ -67,12 +67,16 @@ export default function HeroSection() {
               <Button
                 variant="primary"
                 size="lg"
-                onClick={scrollToForm}
+                onClick={() => {
+                  const section = document.getElementById("summary-section");
+                  if (section) section.scrollIntoView({ behavior: "smooth" });
+                }}
                 rightIcon={<ArrowRight className="w-5 h-5" />}
                 className="hover:scale-105 transition-transform"
               >
                 Start Summarizing
               </Button>
+
               <Button
                 variant="outline"
                 size="lg"
