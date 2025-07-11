@@ -12,7 +12,7 @@ SummixAI is a full-stack AI-powered application that:
 
 ## 🌐 Deployed Frontend
 
-🔗 Visit the app here: [https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)
+🔗 Visit the app here: [summixai-ablogsummarizer-9auur4jm9-adeena-reehams-projects.vercel.app]
 
 ---
 

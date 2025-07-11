@@ -8,7 +8,7 @@ import FeaturesSection from "../components/sections/FeatureSection";
 import BlogUrlForm from "../components/forms/BlogUrlForm";
 import SummaryCard from "../components/cards/SummaryCard";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
-
+import { Analytics } from "@vercel/analytics/next";
 interface SummaryResponse {
   summary: string;
   translation: string;
@@ -92,6 +92,7 @@ export default function MainPage() {
         </div>
       </main>
       <Footer />
+      <Analytics />
     </>
   );
 }
