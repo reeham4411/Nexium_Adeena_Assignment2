@@ -13,11 +13,13 @@ export async function GET() {
     }
 
     return NextResponse.json({ blogId: latestBlog._id });
-  } catch (err: any) {
-    console.error("Error fetching latest blog:", err.message);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error("Error fetching latest blog:", err.message);
+      return NextResponse.json(
+        { error: "Internal Server Error" },
+        { status: 500 }
+      );
+    }
   }
 }

@@ -55,9 +55,11 @@ export default function MainPage() {
       if (!summaryRes.ok) throw new Error(result.message || "Summary failed");
 
       setSummaryData(result);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
-      console.error(err);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message || "Something went wrong.");
+        console.error(err);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -55,8 +55,10 @@ if (!urduSummary || typeof urduSummary !== 'string') {
       translation: urduSummary,
     });
 
-  } catch (err: any) {
+  } catch (err) {
+  if (err instanceof Error) {
     console.error('Summary generation error:', err.message);
     return NextResponse.json({ error: 'Something went wrong while summarizing.' }, { status: 500 });
   }
+}
 }

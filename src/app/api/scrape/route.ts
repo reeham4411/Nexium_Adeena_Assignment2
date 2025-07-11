@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     // Fetch from ScrapingBee
     interface ScrapingBeeResponse {
       content: string;
-      [key: string]: any;
+      [key: string]: unknown;
     }
 
     const response = await axios.get<ScrapingBeeResponse>("https://app.scrapingbee.com/api/v1", {
@@ -42,8 +42,10 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ message: "Blog content stored successfully." });
-  } catch (err: any) {
+ } catch (err) {
+  if (err instanceof Error) {
     console.error("Scrape error:", err.message);
     return NextResponse.json({ error: "Scraping failed." }, { status: 500 });
   }
+}
 }
