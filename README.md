@@ -1,149 +1,205 @@
-SummixAI - AI-Powered Blog Summarizer & Urdu Translator
-SummixAI is a full-stack application that scrapes blog content using a URL using ScrapingBee, generates a concise English summary with HuggingFace’s BART model, and translates it into Urdu using Google Translate. It also stores original and summarized content in MongoDB and Supabase.
+# SummixAI - AI-Powered Blog Summarizer & Urdu Translator
 
-🌐 Deployed Frontend
-Visit the app here: https://your-vercel-app.vercel.app
+SummixAI is a full-stack AI-powered application that:
 
-🚀 Features
-📄 Scrape blog content using a URL
+- Scrapes blog content from a URL using the ScrapingBee API
+- Summarizes the blog using HuggingFace's BART model (via FastAPI backend)
+- Translates the summary to Urdu using Google Translate
+- Stores original content in MongoDB and summaries in Supabase
+- Displays results via a beautifully styled Next.js frontend
 
-🧠 AI-based English summarization (BART model)
+---
 
-🌐 Urdu translation using Google Translate
+## 🌐 Deployed Frontend
 
-☁️ Stores full text in MongoDB, summaries in Supabase
+🔗 Visit the app here: [https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)
 
-📥 Download summaries easily
+---
 
-🖥️ Frontend with Next.js, TailwindCSS, and ShadCN UI
+## 🚀 Features
 
-🔌 Backend with FastAPI and Transformers
+- 📄 Scrape blog content using a URL
+- 🧠 AI-based English summarization (BART model)
+- 🌐 Urdu translation using Google Translate
+- ☁️ Stores full text in MongoDB, summaries in Supabase
+- 📥 Download summaries easily
+- 🖥️ Frontend with Next.js, TailwindCSS, and ShadCN UI
+- 🔌 Backend with FastAPI and Transformers
 
-📁 Project Structure
+---
 
+## 📁 Project Structure
+
+```
 assignment-2/
 ├── src/
-│ ├── app/ # Next.js app
-│ ├── components/ # UI components
-│ ├── lib/
-│ │ ├── translate_Api.py # FastAPI backend (local)
-│ │ ├── mongo.ts # MongoDB setup
-│ │ ├── supabase.ts # Supabase setup
-│ │ ├── models/Blogs.ts # Mongoose schema
-| | |── api/
-| | | └── summary/route.ts
-│ │ └── scrape/route.ts # Scraping logic (Next.js API route)
-│ │ └── fetch-latest-blog/route.ts
+│   ├── app/                 # Next.js app pages and routes
+│   │   ├── api/
+│   │   │   ├── fetch-latest-blog/route.ts
+│   │   │   ├── scrape/route.ts
+│   │   │   └── summary/route.ts
+│   ├── components/          # UI components
+│   ├── lib/
+│   │   ├── translate_Api.py # FastAPI backend (local only)
+│   │   ├── mongo.ts         # MongoDB setup
+│   │   ├── supabase.ts      # Supabase setup
+│   │   └── models/Blogs.ts  # Mongoose schema
 ├── public/
-├── .env.local # Environment variables
+├── .env.local               # Environment variables
 └── README.md
-🧠 How It Works
-User submits a blog URL from the frontend.
+```
 
-Backend scrapes the content using ScrapingBee API.
+---
 
-Scraped content is saved to MongoDB.
+## 🧠 How It Works
 
-The latest blog is fetched and sent to the FastAPI backend for summarization.
+1. User submits a blog URL from the frontend
+2. Backend scrapes the content using ScrapingBee API
+3. Scraped content is saved to MongoDB
+4. The latest blog is fetched and sent to the FastAPI backend for summarization
+5. Summary is translated to Urdu
+6. Summary and translation are saved to Supabase
+7. Results are shown to the user
 
-Summary is translated to Urdu.
+---
 
-Result is saved to Supabase and shown to the user.
+## 🛠️ Tech Stack
 
-🛠️ Tech Stack
-Frontend: Next.js,Tailwind CSS, TypeScript
-Backend: FastApi,HuggingFace, Transformers
-Storage:MongoDB Atlas, Supabase
-Others: Google Translate API, ScrapingBee API,Vercel
+- **Frontend**: Next.js, Tailwind CSS, TypeScript, ShadCN UI
+- **Backend**: FastAPI, HuggingFace Transformers
+- **Storage**: MongoDB Atlas, Supabase
+- **Other APIs**: ScrapingBee, Google Translate
+- **Hosting**: Vercel (frontend), Local backend (FastAPI)
 
-🖥️ Running the Project Locally
+---
 
-1. Clone the repository
+## 🖥️ Running the Project Locally
 
-   git clone https://github.com/reeham4411/blogsummarizer.git
-   cd blogsummarizer
+### 1. Clone the Repository
 
-2. Setup the Frontend (Next.js)
+```bash
+git clone https://github.com/reeham4411/blogsummarizer.git
+cd blogsummarizer
+```
 
-   cd src
-   npm install
-   Create a .env.local file in the src/ directory:
+### 2. Setup the Frontend (Next.js)
 
-env
+```bash
+cd src
+npm install
+```
 
+### 3. Create `.env.local` inside `src/` with:
+
+```env
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_anon_key
-MONGODB_URI=your_mongo_connection_string
+MONGODB_URI=your_mongodb_connection_string
 SCRAPINGBEE_API_KEY=your_scrapingbee_key
+```
 
-To start frontend:
+### 4. Start the Frontend
+
+```bash
 npm run dev
+```
 
-3. Setup the Backend (FastAPI)
-   Install dependencies (inside src/lib):
+### 5. Setup the Backend (FastAPI)
 
-cd src/lib
+```bash
+cd lib
 python -m venv venv
-venv\Scripts\activate # Windows
-source venv/bin/activate # Mac/Linux
+# Windows:
+venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
 
 pip install -r requirements.txt
-requirements.txt should include:
+```
 
+### 6. `requirements.txt` should include:
+
+```
 fastapi
 uvicorn
-googletrans==4.0.0-rc1
 transformers
 torch
+googletrans==4.0.0-rc1
+```
 
-Run FastAPI:
-uvicorn translate_api:app --reload
-🌍 Deployment
-Frontend (Vercel)
-Push your code to GitHub.
+### 7. Run FastAPI
 
-Import project on https://vercel.com
+```bash
+uvicorn translate_Api:app --reload
+```
 
-Set the following Environment Variables in Vercel Dashboard:
-SUPABASE_URL=YOUR SUPABASE URL
-SUPABASE_KEY=YOUR SUPABASE KEY
-MONGODB_URI=YOUR MONGODB URL
-SCRAPINGBEE_API_KEY=YOUR SCRAPING BEE KEY
+---
 
-✅ Example Usage
-Try using any of these blogs:
+## 🌍 Deployment
 
-https://www.theverge.com/2023/07/01/snapchat-ai-bot-features
+### Frontend (Vercel)
 
-https://blog.google/technology/ai/gemini-google-new-ai-model/
+1. Push your code to GitHub
+2. Import your repo to [https://vercel.com](https://vercel.com)
+3. Set the following environment variables in Vercel dashboard:
 
-https://openai.com/index/introducing-chatgpt/
+   - `SUPABASE_URL`
+   - `SUPABASE_KEY`
+   - `MONGODB_URI`
+   - `SCRAPINGBEE_API_KEY`
+   - `BACKEND_API_URL=http://localhost:8000` (for local use)
 
-📝 To Test Locally:
+✅ Your frontend will be deployed on a Vercel URL
 
-# In one terminal
+> ❗ Note: You still need to run your FastAPI backend locally or deploy it separately if required.
 
+---
+
+## ✅ Example URLs to Test
+
+- [https://www.theverge.com/2023/07/01/snapchat-ai-bot-features](https://www.theverge.com/2023/07/01/snapchat-ai-bot-features)
+- [https://blog.google/technology/ai/gemini-google-new-ai-model/](https://blog.google/technology/ai/gemini-google-new-ai-model/)
+- [https://openai.com/index/introducing-chatgpt/](https://openai.com/index/introducing-chatgpt/)
+
+---
+
+## 🧪 To Test Locally
+
+In two terminals:
+
+### Terminal 1: Frontend
+
+```bash
 cd src
 npm run dev
+```
 
-# In another terminal
+### Terminal 2: Backend
 
+```bash
 cd src/lib
-uvicorn translate_api:app --reload
+uvicorn translate_Api:app --reload
+```
 
-🛡️ Limitations
-Free tier APIs might limit request volumes.
+---
 
-Some blog websites may block ScrapingBee even with headers.
+## 🛡️ Limitations
 
-Large text summaries may take 10–15s to load.
+- Free tier APIs have request limits (ScrapingBee, Supabase)
+- Some blog sites may block scraping due to headers
+- AI summarization may take 10–15 seconds for large blogs
 
-📌 Future Improvements
-Add user authentication.
+---
 
-Allow file upload (PDF, TXT).
+## 📌 Future Improvements
 
-Add summary history view.
+- Add authentication
+- Upload PDF/TXT files for summarization
+- View summary history for users
+- Deploy backend on Render/Railway if needed
 
-📃 License
-MIT License. Free to use, modify, and share.
+---
+
+## 📃 License
+
+MIT License — Free to use, modify, and share.
