@@ -10,7 +10,7 @@ import {
   Languages,
   Database,
   Sparkles,
-  ArrowRight,
+
 } from "lucide-react";
 
 const features = [
@@ -57,7 +57,7 @@ const features = [
     icon: FileText,
     title: "Multiple Formats",
     description:
-      "Export summaries in various formats including PDF, TXT, and more",
+      "Export summaries in various formats including TXT, and more",
     color: "from-rose-400 to-red-500",
     delay: 500,
   },
@@ -124,7 +124,7 @@ export default function FeaturesSection() {
                 </div>
 
                 {/* Hover Arrow */}
-                <div
+{/*                 <div
                   className={`absolute top-8 right-8 transform transition-all duration-300 ${
                     hoveredFeature === index
                       ? "translate-x-0 opacity-100"
@@ -132,7 +132,7 @@ export default function FeaturesSection() {
                   }`}
                 >
                   <ArrowRight className="w-5 h-5 text-gray-400" />
-                </div>
+                </div> */}
 
                 {/* Decorative Elements */}
                 <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-pink-400 to-rose-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
