@@ -62,7 +62,7 @@ const features = [
 ];
 
 export default function FeaturesSection() {
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  // const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   return (
     <section id="features" className="py-20 bg-gray-50">
@@ -96,8 +96,8 @@ export default function FeaturesSection() {
                 key={index}
                 className={`group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer`}
                 style={{ animationDelay: `${feature.delay}ms` }}
-                onMouseEnter={() => setHoveredFeature(index)}
-                onMouseLeave={() => setHoveredFeature(null)}
+                // onMouseEnter={() => setHoveredFeature(index)}
+                // onMouseLeave={() => setHoveredFeature(null)}
               >
                 {/* Background Gradient */}
                 <div
