@@ -130,7 +130,7 @@ googletrans==4.0.0-rc1
 ### 7. Run FastAPI
 
 ```bash
-uvicorn translate_Api:app --reload
+uvicorn translate_api:app --reload
 ```
 
 ---
