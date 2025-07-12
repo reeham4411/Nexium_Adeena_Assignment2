@@ -60,7 +60,7 @@ export default function BlogUrlForm({
   return (
     <div className="max-w-2xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-8">
+      <div id="blog-form" className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-lg mb-4">
           <Globe className="w-10 h-10 text-white" />
         </div>
